@@ -24,7 +24,11 @@ for i = 1:size(lbl3.lblSet,1)
     sig_ied_w = -sig_ied.*fadeinoutwin(Nsignal,Nfade,@blackman)';
 
     [pks,locs,w,p] = findpeaks(sig_ied_w,'SortStr','descend');
-    offsetI = Nsignal/2-locs(1);
+    if numel(locs)>1
+        offsetI = Nsignal/2-locs(1);
+    else
+        offsetI =0;
+    end
 
 %     % center the original labels for roi
 %     lbl3.lblSet.Start(i)=lbl3.lblSet.Start(i)-offsetI/fs/24/3600;
